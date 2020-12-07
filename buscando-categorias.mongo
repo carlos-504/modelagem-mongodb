@@ -1,3 +1,9 @@
 db.artigos.find({
     categorias: "Inovação"
 }).explain("executionStats")
+
+db.artigos.createIndex({categorias: 1})
+
+db.artigos.getIndexes()
+
+db.artigos.createIndex({slug: 1})

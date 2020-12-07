@@ -1,0 +1,15 @@
+// Usando forEach para interar na coleção de artigos
+db.artigos.find({}).forEach(artigo => {
+    const infoAutor = db.infoAutores.findOne({email: artigo.autor.email});
+    // Buscando o email dos autores na coleção de artigos e armazenando numa variável
+
+    artigo.autor.id_info = infoAutor._id;
+    // Criando um novo campo no sub documento de artigos e atribuindo o ID de infoAutores
+
+    // Apagando os campos email e senha
+    delete artigo.autor.email;
+    delete artigo.autor.senha;
+
+    // Salvando as alterações da coleção
+    db.artigos.save(artigo)
+})

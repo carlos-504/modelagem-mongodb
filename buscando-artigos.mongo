@@ -1,0 +1,20 @@
+
+db.autores.find({ "artigos.slug": "projeto-caelum-nas-faculdades" })
+// Bucando o slug dos artigos 
+
+db.autores.find({
+    "artigos.slug": "projeto-caelum-nas-faculdades"
+},
+{
+    "artigos.titulo": 1,
+    "artigos.conteudo": 1
+})
+// Para busca e exibir apenas o título e o conteúdo, é necessário passar o value 1 nas respectivas chaves
+
+db.autores.find({
+    nome: "Gabriel Ferreira"
+},
+{
+    "artigos.titulo": 1,
+    "artigos.conteudo": 1
+})

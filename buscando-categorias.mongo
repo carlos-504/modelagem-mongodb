@@ -1,0 +1,3 @@
+db.artigos.find({
+    categorias: "Inovação"
+}).explain("executionStats")

@@ -1,0 +1,36 @@
+// Removendo o ultimo comentário dos artigos
+db.artigos.update({
+    slug: "visualizando-dados-de-frequencia"
+},
+{
+    $pop: {
+        comentarios: 1
+    }
+})
+
+const documento = db.artigos.findOneAndUpdate({
+    slug: "visualizando-dados-de-frequencia"
+}, 
+{
+    $push: {
+        comentarios: {
+            $each: [
+                {
+                    nome: "Carlão",
+                    email: "carlos@email.com",
+                    texto: "Top dos top",
+                    data: ISODate('2020-12-07')
+                }
+            ],
+            $position: 0
+        }
+    }
+}, { returnNewDocument: true })
+
+db.comentarios.insertOne({
+    id_artigo: documento._id,
+    nome: "Carlão",
+    email: "carlos@email.com",
+    texto: "Top dos top",
+    data: ISODate('2020-12-07')
+})
